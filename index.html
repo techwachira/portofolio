@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>wachira tech portfolio</title>
+  <link rel="icon" href="images/f431f8f9-cf99-48b3-ae10-6093bd471c1a.png" type="image/x-icon">
+  <style>
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg-dark: #111111;
+      --bg-medium: #202020;
+      --bg-light: #424242;
+      --text-light: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    header.hero {
+      background-color: var(--bg-medium);
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+    }
+
+    header.hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      text-transform: lowercase;
+    }
+
+    header.hero p {
+      font-size: 1.4rem;
+    }
+
+    .nav-toggle {
+      display: block;
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-light);
+      z-index: 10;
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 4rem;
+      right: 2rem;
+      background-color: rgba(32, 32, 32, 0.9);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 1000;
+    }
+
+    .nav-overlay.active {
+      display: flex;
+    }
+
+    .nav-overlay a {
+      margin: 0.5rem 0;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .nav-overlay a:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    }
+
+    .nav-overlay a:focus {
+      outline: none;
+    }
+
+    @media (min-width: 1101px) {
+      .nav-toggle { display: none; }
+
+      .nav-overlay {
+        display: flex !important;
+        position: absolute;
+        top: 1rem;
+        right: 3rem;
+        flex-direction: row;
+        background: none;
+        padding: 0;
+        box-shadow: none;
+        backdrop-filter: none;
+      }
+
+      .nav-overlay a { margin-left: 1.5rem; }
+    }
+
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--bg-light);
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .section-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .section-text {
+      flex: 1 1 40%;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    .section-media {
+      flex: 1 1 50%;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    img,
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    video:hover,
+    img:hover:not(.portrait) {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .portrait {
+      width: 100%;
+      max-width: 300px;
+      border: 2px solid var(--bg-light);
+      transition: none;
+    }
+
+    .about .section-content {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .about .section-text {
+      max-width: 600px;
+    }
+
+    @media (max-width: 1100px) {
+      .section-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .about .section-content {
+        flex-direction: column;
+      }
+
+      .section-text, .section-media {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      .about .portrait {
+        max-width: 200px;
+      }
+    }
+
+    .instagram iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+
+    a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      display: inline-block;
+    }
+
+    a:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.5s ease;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--text-light);
+      color: var(--bg-dark);
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: var(--bg-medium);
+      color: var(--text-light);
+      text-align: center;
+      padding: 3rem;
+    }
+  </style>
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('.nav-overlay');
+      nav.classList.toggle('active');
+      document.querySelectorAll('.nav-overlay a').forEach(link => {
+        link.addEventListener('click', () => nav.classList.remove('active'));
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      const backToTop = document.querySelector('.back-to-top');
+      const trigger = window.innerHeight / 2;
+      if (window.scrollY > trigger) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+      <div class="nav-overlay">
+        <a href="#about">About</a>
+        <a href="#areas">Areas of Practice</a>
+        <a href="#contact">Work With Me</a>
+      </div>
+      <h1>wachira tech</h1>
+      <p>Creative Tech Portfolio</p>
+    </header>
+
+    <section class="about" id="about">
+      <h2>About</h2>
+      <div class="section-content">
+        <img src="images/f431f8f9-cf99-48b3-ae10-6093bd471c1a.png" alt="Portrait of me" class="section-media portrait">
+        <p class="section-text">This is a short introduction about me.</p>
+      </div>
+    </section>
+
+    <section class="areas" id="areas">
+      <h2>Areas of Practice</h2>
+      <ul class="section-text" style="max-width: 600px; margin: 0 auto; list-style-type: disc;">
+        <li><a href="#videography">Videography</a></li>
+        <li><a href="#editing">Video & Audio Editing</a></li>
+        <li><a href="#photo-editing">Thumbnail Creation & Photo Editing</a></li>
+        <li><a href="#photography">Photography</a></li>
+        <li><a href="#content-creation">Content Creation</a></li>
+      </ul>
+    </section>
+<section class="videography" id="videography">
+  <h2>Videography</h2>
+  <div class="section-content">
+    <p class="section-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla pharetra nisl, a pellentesque enim. Proin facilisis quam ante, nec hendrerit lorem vestibulum vel.</p>
+    <video src="video.mp4" controls class="section-media" style="margin-bottom: 2rem;"></video>
+  </div>
+  <div class="section-content">
+    <p class="section-text"></p>
+    <video src="video2.mp4" controls class="section-media"></video>
+  </div>
+  <div class="section-content" style="margin-top: 2rem;">
+    <img src="images/20231116_163325.jpg" alt="Photo 1" class="section-media" style="max-width: 300px;">
+    <p class="section-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla pharetra nisl, a pellentesque enim. Proin facilisis quam ante, nec hendrerit lorem vestibulum vel.</p>
+  </div>
+</section>
+
+
+   <section class="editing" id="editing">
+  <h2>Video & Audio Editing</h2>
+  <div class="section-content">
+    <p class="section-text">Text, captions, tools like Premiere Pro and CapCut.</p>
+    <video src="edit-sample.mp4" controls class="section-media"></video>
+  </div>
+  <div class="tools">
+    <img src="images/adobe-premiere-svgrepo-com.svg" alt="Premiere Pro" style="width: 40px; height: 40px;">
+    <img src="images/image.png" alt="CapCut" style="width: 40px; height: 40px; background-color: white; border-radius: 4px; padding: 4px;">
+  </div>
+</section>
+
+
+
+<section class="photo-editing" id="photo-editing">
+  <h2>Thumbnail Creation & Photo Editing</h2>
+  <div class="section-content">
+    <p class="section-text">Description of skills and tools used.</p>
+
+    <a href="https://drive.google.com/file/d/1ppnawHidp9Mat8ysOkHz_iuB9MmRtQiU/view?usp=drive_link" target="_blank" rel="noopener">
+      <img src="images/finalEV.png" alt="Another thumbnail example" class="section-media" style="width: 100%; margin-top: 2rem;">
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=MhO3kwRPbo8&t=5s" target="_blank" rel="noopener">
+      <img src="images/EURO TRUCK THUMBNAIL2.png" alt="Edited thumbnails" class="section-media" style="width: 100%;">
+    </a>
+
+    <a href="https://www.youtube.com/watch?v=9dYMEDJRis0" target="_blank" rel="noopener">
+      <img src="images/endless driving zen.png" alt="Additional thumbnail" class="section-media" style="width: 100%; margin-top: 2rem;">
+    </a>
+  </div>
+
+  <div class="tools">
+    <img src="images/photoshop-svgrepo-com.svg" alt="Photoshop" style="width: 40px; height: 40px;">
+  </div>
+</section>
+
+
+
+
+<section class="photography" id="photography">
+  <h2>Photography</h2>
+  <div class="section-content">
+    <p class="section-text">Description of photography skills.</p>
+    <div class="section-media instagram">
+      <iframe src="https://www.instagram.com/p/ClLh1QLgUyT/embed" frameborder="0"></iframe>
+    </div>
+  </div>
+  <div class="section-content">
+    <p class="section-text"></p>
+    <div class="section-media instagram">
+      <iframe src="https://www.instagram.com/p/ClGb1Drou8A/embed" frameborder="0"></iframe>
+    </div>
+  </div>
+  <div class="section-content" style="margin-top: 3rem;">
+    <p class="section-text" style="margin-bottom: 0.5rem;">Follow my photography work on Instagram:</p>
+    <div class="section-media instagram">
+      <iframe src="https://www.instagram.com/wachiramedia/embed" frameborder="0"></iframe>
+    </div>
+  </div>
+</section>
+
+
+<section class="content-creation" id="content-creation">
+  <h2>Content Creation</h2>
+  <div class="section-content">
+    <p class="section-text">
+      Showcasing social media campaigns, branding videos, reels, and creative assets made for platforms like TikTok, Instagram, and YouTube.
+    </p>
+  </div>
+
+  <div class="section-content" style="justify-content: center;">
+    <div class="section-media" style="max-width: 700px;">
+      <a href="https://www.youtube.com/watch?v=dnEVQ9yRKUE" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/dnEVQ9yRKUE/maxresdefault.jpg"
+             alt="Watch on YouTube" style="width:100%; border-radius:10px;" />
+      </a>
+    </div>
+  </div>
+
+  <div class="section-content" style="justify-content: center;">
+    <div class="section-media" style="text-align: center;">
+      <a href="https://www.youtube.com/channel/UClWfyNPxQaH6ajs0V_8DylA?sub_confirmation=1"
+         target="_blank"
+         style="display: inline-block; background: #FF0000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+        Subscribe on YouTube
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+    <section class="contact" id="contact">
+      <h2>Work With Me</h2>
+      <p style="text-align: center">Contact me at: <a href="mailto:example@email.com">example@email.com</a></p>
+    </section>
+
+    <a href="#" class="back-to-top" title="Back to top">↑</a>
+
+   <footer>
+  <p>&copy;2025 wachiratech</p>
+  <div class="social-icons" style="margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem;">
+    <a href="https://www.instagram.com/wachiramedia" target="_blank" title="Instagram">
+      <img src="images/instagram-1-svgrepo-com.svg" alt="Instagram" style="width: 24px; height: 24px;">
+    </a>
+    <a href="https://www.youtube.com/channel/UClWfyNPxQaH6ajs0V_8DylA" target="_blank" title="Twitter">
+      <img src="images/x-social-media-logo-icon.svg" alt="X" style="width: 24px; height: 24px;">
+    </a>
+    <a href="https://www.youtube.com/@wachiratech" target="_blank" title="YouTube">
+      <img src="images/youtube-color-svgrepo-com.svg" alt="YouTube" style="width: 24px; height: 24px;">
+    </a>
+    <a href="https://linktr.ee/wachiratech" target="_blank" title="YouTube">
+      <img src="images/linktree-logo-icon.svg" alt="Linktree" style="width: 24px; height: 24px;">
+    </a>
+
+</body>
+</html>
