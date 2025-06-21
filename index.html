@@ -26,21 +26,36 @@
       background-color: var(--bg-dark);
       color: var(--text-light);
       line-height: 1.6;
-    }
+ .container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
 
-    .container {
-      width: 100%;
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 0 3rem;
-    }
+/* Ensure full-width header and footer */
+header.hero,
+footer {
+  width: 100%;
+}
+
+header.hero .container,
+footer .container {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
 
     header.hero {
-      background-color: var(--bg-medium);
-      padding: 4rem 0;
-      text-align: center;
-      position: relative;
-    }
+  background-color: var(--bg-medium);
+  width: 100vw;             /* full viewport width */
+  margin-left: calc(-50vw + 50%); /* cancel out body margin/padding */
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+}
 
     header.hero h1 {
       font-size: 2.8rem;
@@ -97,6 +112,12 @@
     .nav-overlay a:focus {
       outline: none;
     }
+
+
+
+    
+
+    
 
     @media (max-width: 768px) {
   header.hero h1 {
@@ -305,15 +326,18 @@
 <body>
   <div class="container">
     <header class="hero">
-      <div class="nav-toggle" onclick="toggleMenu()">☰</div>
-      <div class="nav-overlay">
-        <a href="#about">About</a>
-        <a href="#areas">Areas of Practice</a>
-        <a href="#contact">Work With Me</a>
-      </div>
-      <h1>wachira tech</h1>
-      <p>Creative Tech Portfolio</p>
-    </header>
+  <div class="container">
+    <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+    <div class="nav-overlay">
+      <a href="#about">About</a>
+      <a href="#areas">Areas of Practice</a>
+      <a href="#contact">Work With Me</a>
+    </div>
+    <h1>wachira tech</h1>
+    <p>Creative Tech Portfolio</p>
+  </div>
+</header>
+
 
     <section class="about" id="about">
       <h2>About</h2>
