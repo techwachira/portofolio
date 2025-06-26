@@ -9,11 +9,20 @@
     html { scroll-behavior: smooth; }
 
     :root {
-      --bg-dark: #111111;
-      --bg-medium: #202020;
-      --bg-light: #424242;
-      --text-light: #ffffff;
-    }
+  --bg-dark: #111111;
+  --bg-medium: #202020;
+  --bg-light: #424242;
+  --text-light: #ffffff;
+  --overlay-rgb: 32, 32, 32;
+}
+
+     body.light-mode {
+  --bg-dark: #ffffff;
+  --bg-medium: #f0f0f0;
+  --bg-light: #dddddd;
+  --text-light: #111111;
+  --overlay-rgb: 255, 255, 255;
+}
 
     * {
       margin: 0;
@@ -26,6 +35,18 @@
       background-color: var(--bg-dark);
       color: var(--text-light);
       line-height: 1.6;
+    }
+
+    a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      display: inline-block;
+    }
+
+    a:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
     }
     
     .container {
@@ -71,87 +92,6 @@
       font-size: 1.4rem;
     }
 
-    /* === Theme Toggle Switch === */
-    .theme-toggle {
-      width: 60px;
-      height: 30px;
-      background: #111;
-      border-radius: 50px;
-      position: absolute;
-      top: 0.5rem;
-      left: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      z-index: 1001;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .theme-toggle .icon {
-      width: 16px;
-      height: 16px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.6;
-      z-index: 2;
-    }
-
-    .theme-toggle .moon {
-      background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1012 21a9 9 0 009-8.21z"/></svg>');
-    }
-
-    .theme-toggle .sun {
-      background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8-1.41-1.41-1.8 1.79 1.42 1.42zM12 4V1h-1v3h1zm6 8a6 6 0 11-6-6 6 6 0 016 6zm6 1h-3v-1h3v1zm-1.76 7.76l-1.79-1.8-1.42 1.42 1.8 1.79 1.41-1.41zM4 13H1v-1h3v1zm1.76 5.24l1.79 1.8 1.42-1.42-1.8-1.79-1.41 1.41zM12 23v-3h-1v3h1z"/></svg>');
-    }
-
-    .toggle-knob {
-      width: 22px;
-      height: 22px;
-      background-color: white;
-      border-radius: 50%;
-      position: absolute;
-      left: 5px;
-      transition: all 0.3s ease;
-      z-index: 1;
-    }
-
-    /* Light Mode Styling */
-    body.light-mode {
-      background-color: #ffffff;
-      color: #111111;
-    }
-
-    body.light-mode header.hero,
-    body.light-mode footer {
-      background-color: #f0f0f0;
-    }
-
-    body.light-mode .theme-toggle {
-      background: #fff;
-    }
-
-    body.light-mode .toggle-knob {
-      transform: translateX(30px);
-      background-color: #000;
-    }
-
-    body.light-mode a {
-      color: #111111;
-    }
-
-    body.light-mode .nav-overlay {
-      background-color: rgba(200, 200, 200, 0.9);
-    }
-
-    body.light-mode .back-to-top {
-      background-color: #ddd;
-      color: #111;
-    }
-
-
     .nav-toggle {
       display: block;
       position: absolute;
@@ -167,7 +107,7 @@
       position: fixed;
       top: 4rem;
       right: 2rem;
-      background-color: rgba(32, 32, 32, 0.9);
+      background-color: rgba(var(--overlay-rgb), 0.9);
       padding: 1rem;
       border-radius: 0.5rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -388,6 +328,94 @@
   padding: 4rem 0;
   text-align: center;
     }
+    /* ===== Theme Toggle Button ===== */
+.theme-toggle {
+  width: 60px;
+  height: 30px;
+  background: var(--bg-light);
+  border-radius: 50px;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 1001;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.theme-toggle .icon {
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.theme-toggle .moon {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1012 21a9 9 0 009-8.21z"/></svg>');
+}
+
+.theme-toggle .sun {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="orange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8-1.41-1.41-1.8 1.79 1.42 1.42zM12 4V1h-1v3h1zm6 8a6 6 0 11-6-6 6 6 0 016 6zm6 1h-3v-1h3v1zm-1.76 7.76l-1.79-1.8-1.42 1.42 1.8 1.79 1.41-1.41zM4 13H1v-1h3v1zm1.76 5.24l1.79 1.8 1.42-1.42-1.8-1.79-1.41 1.41zM12 23v-3h-1v3h1z"/></svg>');
+}
+
+.toggle-knob {
+  width: 22px;
+  height: 22px;
+  background-color: var(--text-light);
+  border-radius: 50%;
+  position: absolute;
+  left: 5px;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+body.light-mode .toggle-knob {
+  transform: translateX(30px);
+  background-color: var(--text-light);
+}
+.image-frame {
+  background-color: var(--bg-light);
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem auto;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-frame img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+body.light-mode .light-only-frame {
+  display: inline-block;
+  padding: 2px; /* thinner frame */
+  background-color: black;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.light-mode .light-only-frame:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .light-only-frame img {
+  display: block;
+  border-radius: 8px;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+}
+
+
+
   </style>
   <script>
     function toggleMenu() {
@@ -411,13 +439,14 @@
 </head>
 <body>
   <div class="container">
-   <header class="hero">
+<header class="hero">
   <div class="container">
     <div class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
       <div class="icon moon"></div>
       <div class="icon sun"></div>
       <div class="toggle-knob"></div>
     </div>
+
     <div class="nav-toggle" onclick="toggleMenu()">☰</div>
     <div class="nav-overlay">
       <a href="#about">About</a>
@@ -429,7 +458,6 @@
     <p>Creative Tech Portfolio</p>
   </div>
 </header>
-
 
 
 
@@ -452,11 +480,11 @@
 <section class="areas" id="areas">
   <h2>Areas of Practice</h2>
   <ul class="section-text" style="max-width: 600px; margin: 0 auto; list-style-type: disc;">
-    <li><a href="#videography" style="text-decoration: underline; color: white;">Videography & Cinematography</a></li>
-    <li><a href="#editing" style="text-decoration: underline; color: white;">Video & Audio Editing</a></li>
-    <li><a href="#thumbnails" style="text-decoration: underline; color: white;">Thumbnail Creation</a></li>
-    <li><a href="#photography" style="text-decoration: underline; color: white;">Photography & Photo Editing</a></li>
-    <li><a href="#content-creation" style="text-decoration: underline; color: white;">Content Creation</a></li>
+    <li><a href="#videography" style="text-decoration: underline;">Videography & Cinematography</a></li>
+    <li><a href="#editing" style="text-decoration: underline;">Video & Audio Editing</a></li>
+    <li><a href="#thumbnails" style="text-decoration: underline;">Thumbnail Creation</a></li>
+    <li><a href="#photography" style="text-decoration: underline;">Photography & Photo Editing</a></li>
+    <li><a href="#content-creation" style="text-decoration: underline;">Content Creation</a></li>
   </ul>
 </section>
 
@@ -485,7 +513,7 @@
         allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
       </iframe>
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 0.95rem;">
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.95rem;">
         Cinematography – DeKUT Film Hub
       </figcaption>
     </figure>
@@ -494,20 +522,20 @@
   <div class="section-content" style="margin-top: 2rem; gap: 2rem; justify-content: space-around; flex-wrap: wrap;">
     <figure style="text-align: center; max-width: 400px;">
       <video src="videos/P-VID-20221218-WA0019.mp4" class="section-media" autoplay loop muted playsinline controls style="max-width: 100%; height: 350px; object-fit: cover;"></video>
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 1rem;">Videography – City of Refuge</figcaption>
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 1rem;">Videography – City of Refuge</figcaption>
     </figure>
 
     <figure style="text-align: center; max-width: 400px;">
       <video src="videos/ooaf.mp4" class="section-media" autoplay loop muted playsinline controls style="max-width: 100%; height: 350px; object-fit: cover;"></video>
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 1rem;">Videography – OOAIFF </figcaption>
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 1rem;">Videography – OOAIFF </figcaption>
     </figure>
 
    <figure style="text-align: center; max-width: 400px;">
   <a href="https://www.youtube.com/watch?v=0RBuGgeWRZo" target="_blank">
     <img src="images/P-IMG-20220913-WA0016.jpg" alt="Photo 2" class="section-media" style="max-width: 100%; height: 350px; object-fit: cover;">
   </a>
-  <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 1rem;">
-    <a href="https://www.youtube.com/watch?v=0RBuGgeWRZo" target="_blank" style="color: #ccc; text-decoration: underline;">
+  <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 1rem;">
+    <a href="https://www.youtube.com/watch?v=0RBuGgeWRZo" target="_blank" style="color: var(--text-light); text-decoration: underline;">
       Sound - Uthasyo Short Film
     </a>
   </figcaption>
@@ -516,12 +544,12 @@
 
     <figure style="text-align: center; max-width: 400px;">
       <img src="images/IMG_0047.jpg" alt="Photo 2" class="section-media" style="max-width: 100%; height: 350px; object-fit: cover;">
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 1rem;">BTS – Short Film with City of Refuge</figcaption>
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 1rem;">BTS – Short Film with City of Refuge</figcaption>
     </figure>
 
     <figure style="text-align: center; max-width: 400px;">
       <img src="images/IMG20230120163732 (1).jpg" alt="Photo 2" class="section-media" style="max-width: 100%; height: 350px; object-fit: cover;">
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 1rem;">BTS – OOAIFF</figcaption>
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 1rem;">BTS – OOAIFF</figcaption>
     </figure>
   </div>
 
@@ -552,21 +580,21 @@
       <a href="https://www.youtube.com/watch?v=9dYMEDJRis0" target="_blank">
         <img src="images/PR1.png" alt="Editing Preview" style="width: 100%; border-radius: 10px;">
       </a>
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 0.95rem;">
-        <a href="https://www.youtube.com/watch?v=9dYMEDJRis0" target="_blank" style="color: #ccc; text-decoration: underline;">
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.95rem;">
+        <a href="https://www.youtube.com/watch?v=9dYMEDJRis0" target="_blank" style="color: var(--text-light); text-decoration: underline;">
           Adobe Premiere Pro - Click to See Edited Video on YouTube and many more I have worked on.
         </a>
       </figcaption>
     </figure>
     <figure style="max-width: 450px; text-align: center;">
       <video src="videos/BTS31.mp4" controls class="section-media" autoplay loop muted style="width: 100%; border-radius: 10px;"></video>
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 0.95rem;">
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.95rem;">
         Adobe Audition Editing Session Sped Up.
       </figcaption>
     </figure>
     <figure style="max-width: 350px; text-align: center;">
       <video src="videos/INCOGNITO_FINAL.mp4" controls class="section-media" autoplay loop muted style="width: 100%; border-radius: 10px;"></video>
-      <figcaption style="margin-top: 0.5rem; color: #ccc; font-size: 0.95rem;">
+      <figcaption style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.95rem;">
         Edited with Adobe Premiere Pro - Caption Generation for Shorts using CapCut
       </figcaption>
     </figure>
@@ -598,16 +626,29 @@
 
       <img src="images/endless driving zen.png" alt="Additional thumbnail" class="section-media" style="width: 100%; margin-top: 2rem;">
 
-  <div class="section-content" style="margin-top: 2rem; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-  <div style="max-width: 300px;">
+<div class="section-content" style="margin-top: 2rem; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+
+<div class="section-content" style="margin-top: 2rem; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+
+ <div class="section-content" style="margin-top: 2rem; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+
+  <div class="light-only-frame" style="max-width: 300px;">
     <img src="images/CLOUD.png" alt="Thumbnail 1" style="width: 100%; border-radius: 10px;">
   </div>
-  <div style="max-width: 300px;">
+
+  <div class="light-only-frame" style="max-width: 300px;">
     <img src="images/ERROR404.png" alt="Thumbnail 2" style="width: 100%; border-radius: 10px;">
   </div>
-  <div style="max-width: 300px;">
+
+  <div class="light-only-frame" style="max-width: 300px;">
     <img src="images/I.png" alt="Thumbnail 3" style="width: 100%; border-radius: 10px;">
   </div>
+
+</div>
+
+</div>
+
+
 </div>
 
   </div>
@@ -677,7 +718,7 @@
     <div class="section-media" style="text-align: center;">
       <a href="https://www.youtube.com/channel/UClWfyNPxQaH6ajs0V_8DylA?sub_confirmation=1"
          target="_blank"
-         style="display: inline-block; background: #FF0000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+         style="display: inline-block; background: #FF0000; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
         Subscribe on YouTube
       </a>
     </div>
@@ -700,7 +741,7 @@
     <div class="section-media" style="text-align: center;">
       <a href="https://www.youtube.com/@wachiratechpodcast?sub_confirmation=1"
          target="_blank"
-         style="display: inline-block; background: #FF0000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+         style="display: inline-block; background: #FF0000; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
         Subscribe on YouTube
       </a>
     </div>
@@ -732,7 +773,6 @@
   <p class="section-text" style="text-align: center; max-width: 1000px; margin: 0 auto 2rem;">
     I am available for freelance projects, collaborations, or full-time opportunities. Feel free to reach out.
   </p>
-
   <div class="contact-box" style="background-color: #1a1a1a; padding: 2rem; border-radius: 10px; max-width: 1000px; margin-left: auto; margin-right: auto;">
     <h3 style="text-align: center; color: #fff; margin-bottom: 1rem;">Contact Me</h3>
 
@@ -740,11 +780,18 @@
       <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
         <input type="text" name="name" placeholder="Your Name *" required style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
         <input type="email" name="email" placeholder="Your Email *" required style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
-        <input type="text" name="title" placeholder="Your Subject" style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
+        <input type="text" name="subject" placeholder="Your Subject" style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
       </div>
       <textarea name="message" placeholder="Your message" rows="5" required style="padding: 0.75rem; border-radius: 5px; border: none;"></textarea>
-      <button type="submit" style="padding: 0.75rem 1.5rem; background-color: #000000; color: white; border: none; border-radius: 25px; font-weight: bold; align-self: flex-start; cursor: pointer;">SEND MESSAGE</button>
-      <p id="form-success" style="display:none; color: #ffffff; font-weight: bold; margin-top: 1rem;">Thank you for reaching out. I’ve received your message and will be responding shortly.</p>
+<button type="submit"
+        style="padding: 0.75rem 1.5rem; background-color: #ff0000; color: #ffffff; border: none; border-radius: 25px; font-weight: bold; align-self: flex-start; cursor: pointer;">
+  SEND MESSAGE
+</button>
+
+
+<p id="form-success" style="display:none; color: var(--text-light); font-weight: bold; margin-top: 1rem;">
+  Thank you for reaching out. I’ve received your message and will be responding shortly.
+</p>
     </form>
   </div>
 
@@ -772,7 +819,6 @@
     }
   </script>
 </section>
-
 
 
 
@@ -825,5 +871,19 @@
     </a>
    
 
-</body>
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+    }
+  });
+</script>
+
+  </body>
 </html>
