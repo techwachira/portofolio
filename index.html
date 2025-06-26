@@ -221,11 +221,18 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    video:hover,
-    img:hover:not(.portrait) {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
-    }
+    /* Default: Dark mode white glow */
+      video:hover,
+      img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+      }
+
+      /* Light mode override: black glow */
+      body.light-mode img:hover,
+      body.light-mode video:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
 
     .tools {
       display: flex;
@@ -412,6 +419,17 @@ body.light-mode .light-only-frame img {
   height: auto;
   width: auto;
   max-width: 100%;
+}
+/* === Image Hover Glow for Dark/Light Mode === */
+img:hover,
+video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2); /* White glow in dark mode */
+}
+
+body.light-mode img:hover,
+body.light-mode video:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Black glow in light mode */
 }
 
 
