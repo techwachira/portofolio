@@ -788,12 +788,12 @@ body.light-mode video:hover {
 
 
 
-
 <section class="contact" id="contact">
   <h2>Reach Out</h2>
   <p class="section-text" style="text-align: center; max-width: 1000px; margin: 0 auto 2rem;">
     I am available for freelance projects, collaborations, or full-time opportunities. Feel free to reach out.
   </p>
+
   <div class="contact-box" style="background-color: #1a1a1a; padding: 2rem; border-radius: 10px; max-width: 1000px; margin-left: auto; margin-right: auto;">
     <h3 style="text-align: center; color: #fff; margin-bottom: 1rem;">Contact Me</h3>
 
@@ -801,18 +801,17 @@ body.light-mode video:hover {
       <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
         <input type="text" name="name" placeholder="Your Name *" required style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
         <input type="email" name="email" placeholder="Your Email *" required style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
-        <input type="text" name="subject" placeholder="Your Subject *" style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
+        <input type="text" name="subject" placeholder="Your Subject *" required style="flex: 1; padding: 0.75rem; border-radius: 5px; border: none;">
       </div>
       <textarea name="message" placeholder="Your message*" rows="5" required style="padding: 0.75rem; border-radius: 5px; border: none;"></textarea>
-<button type="submit"
-        style="padding: 0.75rem 1.5rem; background-color: #ff0000; color: #ffffff; border: none; border-radius: 25px; font-weight: bold; align-self: flex-start; cursor: pointer;">
-  SEND MESSAGE
-</button>
 
+      <button type="submit" style="padding: 0.75rem 1.5rem; background-color: #ff0000; color: #ffffff; border: none; border-radius: 25px; font-weight: bold; align-self: flex-start; cursor: pointer;">
+        SEND MESSAGE
+      </button>
 
-<p id="form-success" style="display:none; color: var(--text-light); font-weight: bold; margin-top: 1rem;">
-  Thank you for reaching out. I’ve received your message and will be responding shortly.
-</p>
+      <p id="form-success" style="display:none; color: var(--text-light); font-weight: bold; margin-top: 1rem;">
+        Message Sent!
+      </p>
     </form>
   </div>
 
@@ -820,18 +819,27 @@ body.light-mode video:hover {
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     (function () {
-      emailjs.init("3xts12iOfzeX7YhFO"); // Your public key
+      emailjs.init("3xts12iOfzeX7YhFO"); // Your EmailJS Public Key
     })();
 
     function sendEmail(event) {
       event.preventDefault();
       const form = document.getElementById("contact-form");
 
+      // Send confirmation to the user
       emailjs.sendForm("service_oiibmzp", "template_bxx5otg", form)
         .then(() => {
+          console.log("Confirmation sent to user.");
+        });
+
+      // Send notification to site owner
+      emailjs.sendForm("service_oiibmzp", "template_wvdvnhl", form)
+        .then(() => {
+          console.log("Notification sent to owner.");
           document.getElementById("form-success").style.display = "block";
           form.reset();
-        }, (error) => {
+        })
+        .catch((error) => {
           alert("Something went wrong. Please try again.");
           console.error("EmailJS Error:", error);
         });
@@ -840,6 +848,7 @@ body.light-mode video:hover {
     }
   </script>
 </section>
+
 
 
 
