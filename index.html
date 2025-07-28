@@ -855,10 +855,20 @@ body.light-mode video:hover {
         SEND MESSAGE
       </button>
 
+      <!-- OR Divider -->
+      <p style="text-align: center; color: #ffffffa8; margin: 0.5rem 0; font-weight: bold;">
+        ─── OR ───
+      </p>
+
+      <!-- WhatsApp Button -->
+      <a href="https://wa.me/2547XXXXXXXX" target="_blank" class="whatsapp-button">
+        Message on WhatsApp
+      </a>
+
       <p id="form-success" style="display:none; color: var(--text-light); font-weight: bold; margin-top: 1rem;">
         Message Sent!
       </p>
-    </form>
+    </form>    
   </div>
 
   <!-- Button Press Animation Style -->
@@ -876,6 +886,26 @@ body.light-mode video:hover {
     }
 
     .animated-button:active {
+      transform: scale(0.95);
+    }
+
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #25D366;
+      color: #ffffff;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.1s ease-in-out;
+      width: fit-content;
+      align-self: center;
+    }
+
+    .whatsapp-button:active {
       transform: scale(0.95);
     }
   </style>
